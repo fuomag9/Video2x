@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="button_enhance" Content="ENHANCE" HorizontalAlignment="Left" Margin="206,184,0,0" VerticalAlignment="Top" Width="367" Height="181"/>
+        <Button Content="select video" HorizontalAlignment="Left" Margin="485,33,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="Button_Click"/>
+        <TextBox x:Name="textbox_folder" HorizontalAlignment="Left" Height="30" Margin="22,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True"/>
+        <TextBox x:Name="textbox_save" HorizontalAlignment="Left" Height="30" Margin="22,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True"/>
+        <Button x:Name="save_button" Content="save file" HorizontalAlignment="Left" Margin="485,84,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="Save_button_Click"/>
+
     </Grid>
 </Window>
