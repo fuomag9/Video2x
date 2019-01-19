@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video2x", "Video2x\Video2x.csproj", "{996A8D90-E3B0-4145-B697-D62C9E3F701C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Periscope-recorder", "..\Periscope-Recorder-Gui\Periscope-recorder\Periscope-recorder.csproj", "{B222E87F-0DA8-4092-8CE5-03C66CD5544F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +17,15 @@ Global
 		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7B50CA8E-E41D-46D5-A283-194962E5C328}
+		SolutionGuid = {25329BF8-F002-4BE5-81DB-CE85BD676BE3}
 	EndGlobalSection
 EndGlobal
