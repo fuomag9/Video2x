@@ -130,7 +130,7 @@ namespace Video2x
             //just because threads hates me :(
             string input_file = textbox_folder.Text;
 
-           await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -i " + input_file  + " -vsync 0 img-%d.png", debug));
+            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -i " + input_file  + " -vsync 0 img-%d.png", debug));
 
             progress_bar.Value++;
 
@@ -155,11 +155,14 @@ namespace Video2x
             risoluzione = shellProperty_width.Value.ToString() + "x" + shellProperty_height.Value.ToString();
 
 
+            var lista_files = directoryInfo.GetFiles();
+            Funzioni_utili.DirectoryCopy(System.IO.Path.Combine(System.IO.Path.Combine(application_path, "waifu2x"), "models_rgb"), System.IO.Path.Combine(temp_dir, "models_rgb"));
 
 
-            foreach (FileInfo file in directoryInfo.GetFiles())
+
+            foreach (FileInfo file in lista_files)
             {
-                await Task.Run(() => Esegui_console(System.IO.Path.Combine(application_path, "waifu2x"), "waifu2x-converter-cpp.exe -i " + file.Name + " -o " + file.Name, debug));
+                await Task.Run(() => Esegui_console(temp_dir         ,".'"+System.IO.Path.Combine(System.IO.Path.Combine(application_path, "waifu2x"),@".\waifu2x-converter-cpp.exe")+ "' -i " + file.Name + " -o " + file.Name, debug));
 
 
             }

@@ -22,10 +22,10 @@
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="fuomag9"/>
-    <ROW Property="ProductCode" Value="1033:{D2B74CDC-555C-4F15-A2A1-A32395AECC77} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{C59B6DAE-89D9-424A-BBFA-BFF5119C51A0} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Video2x"/>
-    <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.0.5" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{5F4E7CB6-CD9E-42A3-A079-DA074FBD62B8}"/>
