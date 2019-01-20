@@ -17,7 +17,7 @@
         <TextBox x:Name="textbox_save" HorizontalAlignment="Left" Height="30" Margin="22,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True" Grid.ColumnSpan="2"/>
         <Button x:Name="save_button" Content="save file" HorizontalAlignment="Left" Margin="30.176,84,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="Save_button_Click" Grid.Column="1"/>
         <CheckBox x:Name="checkbox_loseless" Content="Loseless compression" HorizontalAlignment="Left" Margin="161,33,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="15" Margin="22,139,0,0" VerticalAlignment="Top" Width="551" Grid.ColumnSpan="2" Visibility="Hidden" Maximum="3"/>
+        <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="15" Margin="22,139,0,0" VerticalAlignment="Top" Width="551" Grid.ColumnSpan="2" Visibility="Hidden"/>
         <CheckBox x:Name="checkbox_debug" Content="Enable debug" HorizontalAlignment="Left" Margin="161,53,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
     </Grid>

@@ -100,12 +100,25 @@ namespace Video2x
             }
 
             //code
-
+            
             if (Directory.Exists(System.IO.Path.GetTempPath() + "\\videoframes\\"))
 
-            { Directory.Delete(System.IO.Path.GetTempPath() + "\\videoframes\\",true); }
+            {
+                try
+                {
+                    Directory.Delete(System.IO.Path.GetTempPath() + "\\videoframes\\", true);
+                }
+                catch (System.IO.IOException)
+                {
 
-            Directory.CreateDirectory(System.IO.Path.GetTempPath() + "\\videoframes\\");
+                    MessageBox.Show("An error happened, retry");
+                    return;
+                }
+
+
+                 } 
+
+            Directory.CreateDirectory(System.IO.Path.GetTempPath() + "\\videoframes\\"); 
 
             string temp_dir = System.IO.Path.GetTempPath()+ "\\videoframes\\";
 
@@ -127,6 +140,8 @@ namespace Video2x
                 frames_count++;
             }
 
+            progress_bar.Maximum = frames_count + 2;
+
             string result_file = textbox_save.Text;
 
             ShellObject obj = ShellObject.FromParsingName(input_file);
@@ -139,19 +154,30 @@ namespace Video2x
 
 
 
-            await Task.Run(() => Esegui_console_waifu2x(temp_dir, directoryInfo.GetFiles(), debug));
+
+            Funzioni_utili.DirectoryCopy(@"D:\fuomag9\Documents\Video2x\Video2x\models_rgb", System.IO.Path.Combine(temp_dir, "models_rgb"));
+
+            foreach (FileInfo file in directoryInfo.GetFiles())
+            {
+                await Task.Run(() => Esegui_console(temp_dir, "waifu2x-converter-cpp.exe -i " + file.Name + " -o " + file.Name, debug));
+
+
+            }
 
             progress_bar.Value++;
 
 
             
 
-            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -r "+framerate+" -f image2 -s "+risoluzione+" -start_number 1 -i img-%d.png -vframes "+frames_count +" - vcodec libx264 - crf "+ compression_rate+ " - pix_fmt yuv420p "+result_file,       debug));
+            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -r "+framerate+" -f image2 -s "+risoluzione+" -start_number 1 -i img-%d.png -vframes "+frames_count +" -vcodec libx264 -crf "+ compression_rate+ " -pix_fmt yuv420p "+result_file,       debug));
 
             progress_bar.Value++;
 
             MessageBox.Show("Finished!");
 
+            progress_bar.Value = 0;
+            progress_bar.Visibility = System.Windows.Visibility.Hidden;
+            Directory.Delete(System.IO.Path.GetTempPath() + "\\videoframes\\", true);
 
 
 
@@ -182,30 +208,6 @@ namespace Video2x
             process.WaitForExit();
         }
 
-        public void Esegui_console_waifu2x(string cartella, FileInfo[] Files, bool visualizza_console = false )
-        {
-            Funzioni_utili.DirectoryCopy(@"D:\fuomag9\Documents\Video2x\Video2x\models_rgb", System.IO.Path.Combine(cartella, "models_rgb"));
-
-
-            foreach (FileInfo file in Files)
-            {
-                // Perform a long running work...
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                if (!visualizza_console)
-                {
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                }
-                startInfo.FileName = "powershell.exe";
-                startInfo.Arguments = "cd '" + cartella + "';" + "waifu2x-converter-cpp.exe -i " + file.Name + " -o " + file.Name;
-                //startInfo.Arguments = "cd '" + cartella + "';dir;PAUSE";
-
-                process.StartInfo = startInfo;
-                process.Start();
-                process.WaitForExit();
-            }
-            
-        }
 
         public static class Funzioni_utili
         {
