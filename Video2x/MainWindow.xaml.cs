@@ -59,6 +59,8 @@ namespace Video2x
             int frames_count=0;
             int compression_rate;
             bool debug;
+            string application_path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
 
             //exceptions checking
 
@@ -155,11 +157,9 @@ namespace Video2x
 
 
 
-            Funzioni_utili.DirectoryCopy(@"D:\fuomag9\Documents\Video2x\Video2x\models_rgb", System.IO.Path.Combine(temp_dir, "models_rgb"));
-
             foreach (FileInfo file in directoryInfo.GetFiles())
             {
-                await Task.Run(() => Esegui_console(temp_dir, "waifu2x-converter-cpp.exe -i " + file.Name + " -o " + file.Name, debug));
+                await Task.Run(() => Esegui_console(System.IO.Path.Combine(application_path, "waifu2x"), "waifu2x-converter-cpp.exe -i " + file.Name + " -o " + file.Name, debug));
 
 
             }
