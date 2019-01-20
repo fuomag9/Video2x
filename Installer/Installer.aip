@@ -9,8 +9,8 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.WindowsAPICodePack.Shell.dll" Value="..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.WindowsAPICodePack.ShellExtensions.dll" Value="..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.WindowsAPICodePack.dll" Value="..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Video2x.exe" Value="..\Video2x\bin\Debug"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Video2x.exe.config" Value="..\Video2x\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Video2x.exe" Value="..\Video2x\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Video2x.exe.config" Value="..\Video2x\bin\Release"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.WindowsAPICodePack.Shell.dll" Value="Microsoft.WindowsAPICodePack.Shell.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.WindowsAPICodePack.ShellExtensions.dll" Value="Microsoft.WindowsAPICodePack.ShellExtensions.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.WindowsAPICodePack.dll" Value="Microsoft.WindowsAPICodePack.dll"/>
