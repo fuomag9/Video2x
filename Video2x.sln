@@ -5,22 +5,27 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video2x", "Video2x\Video2x.csproj", "{996A8D90-E3B0-4145-B697-D62C9E3F701C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Periscope-recorder", "..\Periscope-Recorder-Gui\Periscope-recorder\Periscope-recorder.csproj", "{B222E87F-0DA8-4092-8CE5-03C66CD5544F}"
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "Installer", "Installer\Installer.aiproj", "{18175D30-F2F2-43C7-97F5-370B71769E22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.All|Any CPU.Build.0 = Release|Any CPU
 		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{996A8D90-E3B0-4145-B697-D62C9E3F701C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B222E87F-0DA8-4092-8CE5-03C66CD5544F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18175D30-F2F2-43C7-97F5-370B71769E22}.All|Any CPU.ActiveCfg = DefaultBuild
+		{18175D30-F2F2-43C7-97F5-370B71769E22}.All|Any CPU.Build.0 = DefaultBuild
+		{18175D30-F2F2-43C7-97F5-370B71769E22}.Debug|Any CPU.ActiveCfg = DefaultBuild
+		{18175D30-F2F2-43C7-97F5-370B71769E22}.Debug|Any CPU.Build.0 = DefaultBuild
+		{18175D30-F2F2-43C7-97F5-370B71769E22}.Release|Any CPU.ActiveCfg = DefaultBuild
+		{18175D30-F2F2-43C7-97F5-370B71769E22}.Release|Any CPU.Build.0 = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
