@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Video2x"
         mc:Ignorable="d"
-        Title="Video2x 1.0.5" Height="450" Width="800">
+        Title="Video2x 1.0.7" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="455*"/>
             <ColumnDefinition Width="337*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="button_enhance" Content="ENHANCE" HorizontalAlignment="Left" Margin="206,184,0,0" VerticalAlignment="Top" Width="367" Height="181" Click="Button_enhance_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="button_enhance" Content="ENHANCE" HorizontalAlignment="Left" Margin="206,184,0,0" VerticalAlignment="Top" Width="367" Height="181" Click="Button_enhance_Click" Grid.ColumnSpan="2" FontSize="72"/>
         <Button Content="select video" HorizontalAlignment="Left" Margin="30.176,33,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="Button_Click" Grid.Column="1"/>
         <TextBox x:Name="textbox_folder" HorizontalAlignment="Left" Height="30" Margin="22,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True" Grid.ColumnSpan="2"/>
         <TextBox x:Name="textbox_save" HorizontalAlignment="Left" Height="30" Margin="22,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True" Grid.ColumnSpan="2"/>

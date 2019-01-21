@@ -130,7 +130,7 @@ namespace Video2x
             //just because threads hates me :(
             string input_file = textbox_folder.Text;
 
-            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -i " + input_file  + " -vsync 0 img-%d.png", debug));
+            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -i '" + input_file  + "' -vsync 0 img-%d.png", debug));
 
             progress_bar.Value++;
 
@@ -172,7 +172,7 @@ namespace Video2x
 
             
 
-            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -r "+framerate+" -f image2 -s "+risoluzione+" -start_number 1 -i img-%d.png -vframes "+frames_count +" -vcodec libx264 -crf "+ compression_rate+ " -pix_fmt yuv420p "+result_file,       debug));
+            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -r "+framerate+" -f image2 -s "+risoluzione+" -start_number 1 -i img-%d.png -vframes "+frames_count +" -vcodec libx264 -crf "+ compression_rate+ " -pix_fmt yuv420p '"+result_file+"'",       debug));
 
             progress_bar.Value++;
 
