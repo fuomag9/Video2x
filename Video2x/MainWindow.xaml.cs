@@ -35,9 +35,18 @@ namespace Video2x
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new CommonOpenFileDialog();
-            CommonFileDialogResult result = dialog.ShowDialog();
-            textbox_folder.Text = dialog.FileName;
+            try
+            {
+                var dialog = new CommonOpenFileDialog();
+                CommonFileDialogResult result = dialog.ShowDialog();
+                textbox_folder.Text = dialog.FileName;
+            }
+            catch (System.InvalidOperationException)
+            {
+                //MessageBox.Show("Non è stato selezionato nessun video");
+                //System.Diagnostics.Debug.WriteLine(textbox_folder.Text);
+            }
+            
         }
 
         private void Save_button_Click(object sender, RoutedEventArgs e)
