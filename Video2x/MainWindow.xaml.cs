@@ -52,7 +52,7 @@ namespace Video2x
         private void Save_button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog {
-                Filter = "mp4|*.mp4"
+                Filter = "mp4|*.mp4"+"|all files|*.*"
             };
             saveFileDialog.ShowDialog();
 
