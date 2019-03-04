@@ -19,6 +19,7 @@ using System.Threading;
 using Microsoft.WindowsAPICodePack.Shell;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace Video2x
 {
@@ -35,23 +36,24 @@ namespace Video2x
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+
+
+            var dialog = new OpenFileDialog
             {
-                var dialog = new CommonOpenFileDialog();
-                CommonFileDialogResult result = dialog.ShowDialog();
-                textbox_folder.Text = dialog.FileName;
-            }
-            catch (System.InvalidOperationException)
-            {
-                //MessageBox.Show("Non è stato selezionato nessun video");
-                //System.Diagnostics.Debug.WriteLine(textbox_folder.Text);
-            }
+                Filter = "mp4|*.mp4"
+            };
+            dialog.ShowDialog();
+            textbox_folder.Text = dialog.FileName;
+            
+            
             
         }
 
         private void Save_button_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog {
+                Filter = "mp4|*.mp4"
+            };
             saveFileDialog.ShowDialog();
 
 
