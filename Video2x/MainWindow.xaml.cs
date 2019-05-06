@@ -249,7 +249,7 @@ namespace Video2x
                     staThread.Join();
                     return clipboardData;
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     return string.Empty;
                 }
