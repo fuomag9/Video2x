@@ -1,25 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Shell;
+using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using System;
 using System.IO;
 using System.Threading;
-using Microsoft.WindowsAPICodePack.Shell;
-using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
-using System.Diagnostics;
-using Microsoft.Win32;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Video2x
 {
@@ -44,15 +30,16 @@ namespace Video2x
             };
             dialog.ShowDialog();
             textbox_folder.Text = dialog.FileName;
-            
-            
-            
+
+
+
         }
 
         private void Save_button_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog {
-                Filter = "mp4|*.mp4"+"|all files|*.*"
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "mp4|*.mp4" + "|all files|*.*"
             };
             saveFileDialog.ShowDialog();
 
@@ -63,11 +50,11 @@ namespace Video2x
 
         private async void Button_enhance_Click(object sender, RoutedEventArgs e)
         {
-            
+
             string framerate;
             string risoluzione;
             float tempo_stimato;
-            int frames_count=0;
+            int frames_count = 0;
             int compression_rate;
             bool debug;
             string application_path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -113,7 +100,7 @@ namespace Video2x
             }
 
             //code
-            
+
             if (Directory.Exists(System.IO.Path.GetTempPath() + "\\videoframes\\"))
 
             {
@@ -129,11 +116,11 @@ namespace Video2x
                 }
 
 
-                 } 
+            }
 
-            Directory.CreateDirectory(System.IO.Path.GetTempPath() + "\\videoframes\\"); 
+            Directory.CreateDirectory(System.IO.Path.GetTempPath() + "\\videoframes\\");
 
-            string temp_dir = System.IO.Path.GetTempPath()+ "\\videoframes\\";
+            string temp_dir = System.IO.Path.GetTempPath() + "\\videoframes\\";
 
             progress_bar.Visibility = System.Windows.Visibility.Visible;
 
@@ -141,11 +128,11 @@ namespace Video2x
             //just because threads hates me :(
             string input_file = textbox_folder.Text;
 
-            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -i '" + input_file  + "' -vsync 0 img-%d.png", debug));
+            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -i '" + input_file + "' -vsync 0 img-%d.png", debug));
 
             progress_bar.Value++;
 
-           
+
 
             DirectoryInfo directoryInfo = new DirectoryInfo(temp_dir);
             foreach (var item in directoryInfo.GetFiles())
@@ -173,7 +160,7 @@ namespace Video2x
 
             foreach (FileInfo file in lista_files)
             {
-                await Task.Run(() => Esegui_console(temp_dir         ,".'"+System.IO.Path.Combine(System.IO.Path.Combine(application_path, "waifu2x"),@".\waifu2x-converter-cpp.exe")+ "' -i " + file.Name + " -o " + file.Name, debug));
+                await Task.Run(() => Esegui_console(temp_dir, ".'" + System.IO.Path.Combine(System.IO.Path.Combine(application_path, "waifu2x"), @".\waifu2x-converter-cpp.exe") + "' -i " + file.Name + " -o " + file.Name, debug));
 
 
             }
@@ -181,9 +168,9 @@ namespace Video2x
             progress_bar.Value++;
 
 
-            
 
-            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -r "+framerate+" -f image2 -s "+risoluzione+" -start_number 1 -i img-%d.png -vframes "+frames_count +" -vcodec libx264 -crf "+ compression_rate+ " -pix_fmt yuv420p '"+result_file+"'",       debug));
+
+            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
 
             progress_bar.Value++;
 
@@ -261,7 +248,7 @@ namespace Video2x
                     return string.Empty;
                 }
             }
-            public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs=false)
+            public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs = false)
             {
                 // Get the subdirectories for the specified directory.
                 DirectoryInfo dir = new DirectoryInfo(sourceDirName);
