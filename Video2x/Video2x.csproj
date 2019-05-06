@@ -51,10 +51,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.DexterLib">
-      <HintPath>..\..\Periscope-Recorder-Gui\Periscope-recorder\obj\Debug\Interop.DexterLib.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -115,21 +111,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="models_rgb\noise0_model.json" />
-    <None Include="models_rgb\noise0_model.json.bin" />
-    <None Include="models_rgb\noise1_model.json" />
-    <None Include="models_rgb\noise1_model.json.bin" />
-    <None Include="models_rgb\noise2_model.json" />
-    <None Include="models_rgb\noise2_model.json.bin" />
-    <None Include="models_rgb\noise3_model.json" />
-    <None Include="models_rgb\noise3_model.json.bin" />
-    <None Include="models_rgb\scale2.0x_model.json" />
-    <None Include="models_rgb\scale2.0x_model.json.bin" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="waifu2x\models_rgb\noise0_model.json" />
+    <None Include="waifu2x\models_rgb\noise0_model.json.bin" />
+    <None Include="waifu2x\models_rgb\noise1_model.json" />
+    <None Include="waifu2x\models_rgb\noise1_model.json.bin" />
+    <None Include="waifu2x\models_rgb\noise2_model.json" />
+    <None Include="waifu2x\models_rgb\noise2_model.json.bin" />
+    <None Include="waifu2x\models_rgb\noise3_model.json" />
+    <None Include="waifu2x\models_rgb\noise3_model.json.bin" />
+    <None Include="waifu2x\models_rgb\scale2.0x_model.json" />
+    <None Include="waifu2x\models_rgb\scale2.0x_model.json.bin" />
+    <None Include="waifu2x\w2xc.exp" />
+    <None Include="waifu2x\w2xc.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -140,6 +138,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="waifu2x\conv.exe" />
+    <Content Include="waifu2x\opencv_world401.dll" />
+    <Content Include="waifu2x\runbench.exe" />
+    <Content Include="waifu2x\runtest.exe" />
+    <Content Include="waifu2x\w2xc.dll" />
+    <Content Include="waifu2x\w2xcr.exe" />
+    <Content Include="waifu2x\waifu2x-converter-cpp.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

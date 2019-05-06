@@ -37,7 +37,7 @@ namespace Video2x
 
         private void Save_button_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
             {
                 Filter = "mp4|*.mp4" + "|all files|*.*"
             };
@@ -57,7 +57,8 @@ namespace Video2x
             int frames_count = 0;
             int compression_rate;
             bool debug;
-            string application_path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string application_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string temp_dir_path = Path.Combine(Path.GetTempPath(), "videoframes");
 
 
             //exceptions checking
@@ -101,14 +102,14 @@ namespace Video2x
 
             //code
 
-            if (Directory.Exists(System.IO.Path.GetTempPath() + "\\videoframes\\"))
+            if (Directory.Exists(temp_dir_path))
 
             {
                 try
                 {
-                    Directory.Delete(System.IO.Path.GetTempPath() + "\\videoframes\\", true);
+                    Directory.Delete(temp_dir_path, true);
                 }
-                catch (System.IO.IOException)
+                catch (IOException)
                 {
 
                     MessageBox.Show("An error happened, retry");
@@ -118,26 +119,28 @@ namespace Video2x
 
             }
 
-            Directory.CreateDirectory(System.IO.Path.GetTempPath() + "\\videoframes\\");
+            
 
-            string temp_dir = System.IO.Path.GetTempPath() + "\\videoframes\\";
+            Directory.CreateDirectory(temp_dir_path); //create folder for frames
 
-            progress_bar.Visibility = System.Windows.Visibility.Visible;
+            
+
+            progress_bar.Visibility = Visibility.Visible;
 
 
             //just because threads hates me :(
             string input_file = textbox_folder.Text;
 
-            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -i '" + input_file + "' -vsync 0 img-%d.png", debug));
+            await Task.Run(() => Esegui_console(temp_dir_path, "ffmpeg -i '" + input_file + "' -vsync 0 img-%d.png", debug));
 
             progress_bar.Value++;
 
 
 
-            DirectoryInfo directoryInfo = new DirectoryInfo(temp_dir);
-            foreach (var item in directoryInfo.GetFiles())
+            DirectoryInfo temp_dir = new DirectoryInfo(temp_dir_path);
+            foreach (var item in temp_dir.GetFiles())
             {
-                frames_count++;
+                frames_count++; //conta i frame totali
             }
 
             progress_bar.Maximum = frames_count + 2;
@@ -145,24 +148,27 @@ namespace Video2x
             string result_file = textbox_save.Text;
 
             ShellObject obj = ShellObject.FromParsingName(input_file);
-            ShellProperty<uint?> rateProp = obj.Properties.GetProperty<uint?>("System.Video.FrameRate");
-            ShellProperty<uint?> shellProperty_width = obj.Properties.GetProperty<uint?>("System.Video.FrameWidth");
-            ShellProperty<uint?> shellProperty_height = obj.Properties.GetProperty<uint?>("System.Video.FrameHeight");
+            ShellProperty<uint?> rateProp = obj.Properties.GetProperty<uint?>("System.Video.FrameRate"); //framerate del file
+            ShellProperty<uint?> shellProperty_width = obj.Properties.GetProperty<uint?>("System.Video.FrameWidth"); //width del file
+            ShellProperty<uint?> shellProperty_height = obj.Properties.GetProperty<uint?>("System.Video.FrameHeight"); //height del file
 
             framerate = (rateProp.Value / 1000).ToString();
             risoluzione = shellProperty_width.Value.ToString() + "x" + shellProperty_height.Value.ToString();
 
 
-            var lista_files = directoryInfo.GetFiles();
-            Funzioni_utili.DirectoryCopy(System.IO.Path.Combine(System.IO.Path.Combine(application_path, "waifu2x"), "models_rgb"), System.IO.Path.Combine(temp_dir, "models_rgb"));
+            var lista_files_temp_dir = temp_dir.GetFiles();
+            string waifu_2x_folder = Path.Combine(application_path, "waifu2x");
+            string waifu_2x_folder_temp = Path.Combine(temp_dir_path, "waifu2x");
+            string models_rgb_folder = Path.Combine(waifu_2x_folder, "models_rgb");
+            string models_rgb_folder_temp = Path.Combine(temp_dir_path, "models_rgb");
+            Funzioni_utili.DirectoryCopy(waifu_2x_folder, waifu_2x_folder_temp); //copia waifu2x nella temp
+            Funzioni_utili.DirectoryCopy(models_rgb_folder, models_rgb_folder_temp);
 
 
 
-            foreach (FileInfo file in lista_files)
+            foreach (FileInfo frame in lista_files_temp_dir)
             {
-                await Task.Run(() => Esegui_console(temp_dir, ".'" + System.IO.Path.Combine(System.IO.Path.Combine(application_path, "waifu2x"), @".\waifu2x-converter-cpp.exe") + "' -i " + file.Name + " -o " + file.Name, debug));
-
-
+                await Task.Run(() => Esegui_console(temp_dir_path, ".'" + Path.Combine(waifu_2x_folder_temp, @".\waifu2x-converter-cpp.exe") + "' -i " + frame.Name + " -o " + frame.Name, debug));
             }
 
             progress_bar.Value++;
@@ -170,15 +176,15 @@ namespace Video2x
 
 
 
-            await Task.Run(() => Esegui_console(temp_dir, "ffmpeg -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
+            await Task.Run(() => Esegui_console(temp_dir_path, "ffmpeg -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
 
             progress_bar.Value++;
 
             MessageBox.Show("Finished!");
 
             progress_bar.Value = 0;
-            progress_bar.Visibility = System.Windows.Visibility.Hidden;
-            Directory.Delete(System.IO.Path.GetTempPath() + "\\videoframes\\", true);
+            progress_bar.Visibility = Visibility.Hidden;
+            Directory.Delete(Path.GetTempPath() + "\\videoframes\\", true);
 
 
 
@@ -248,7 +254,7 @@ namespace Video2x
                     return string.Empty;
                 }
             }
-            public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs = false)
+            public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs = true)
             {
                 // Get the subdirectories for the specified directory.
                 DirectoryInfo dir = new DirectoryInfo(sourceDirName);
