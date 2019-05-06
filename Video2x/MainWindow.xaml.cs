@@ -60,7 +60,6 @@ namespace Video2x
             string application_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string temp_dir_path = Path.Combine(Path.GetTempPath(), "videoframes");
 
-
             //exceptions checking
 
             if (textbox_save.Text == "")
@@ -143,7 +142,7 @@ namespace Video2x
                 frames_count++; //conta i frame totali
             }
 
-            progress_bar.Maximum = frames_count + 2;
+            progress_bar.Maximum = frames_count + 1;
 
             string result_file = textbox_save.Text;
 
@@ -169,9 +168,10 @@ namespace Video2x
             foreach (FileInfo frame in lista_files_temp_dir)
             {
                 await Task.Run(() => Esegui_console(temp_dir_path, ".'" + Path.Combine(waifu_2x_folder_temp, @".\waifu2x-converter-cpp.exe") + "' -i " + frame.Name + " -o " + frame.Name, debug));
+                progress_bar.Value++;
             }
 
-            progress_bar.Value++;
+            
 
 
 
@@ -277,7 +277,7 @@ namespace Video2x
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo file in files)
                 {
-                    string temppath = System.IO.Path.Combine(destDirName, file.Name);
+                    string temppath = Path.Combine(destDirName, file.Name);
                     file.CopyTo(temppath, false);
                 }
 
@@ -286,7 +286,7 @@ namespace Video2x
                 {
                     foreach (DirectoryInfo subdir in dirs)
                     {
-                        string temppath = System.IO.Path.Combine(destDirName, subdir.Name);
+                        string temppath = Path.Combine(destDirName, subdir.Name);
                         DirectoryCopy(subdir.FullName, temppath, copySubDirs);
                     }
                 }
