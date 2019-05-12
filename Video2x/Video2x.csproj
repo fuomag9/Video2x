@@ -50,6 +50,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>web_hi_res_512.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
@@ -115,6 +118,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="web_hi_res_512.ico" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -124,18 +128,42 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="waifu2x\models_rgb\noise0_model.json" />
-    <Content Include="waifu2x\models_rgb\noise0_model.json.bin" />
-    <Content Include="waifu2x\models_rgb\noise1_model.json" />
-    <Content Include="waifu2x\models_rgb\noise1_model.json.bin" />
-    <Content Include="waifu2x\models_rgb\noise2_model.json" />
-    <Content Include="waifu2x\models_rgb\noise2_model.json.bin" />
-    <Content Include="waifu2x\models_rgb\noise3_model.json" />
-    <Content Include="waifu2x\models_rgb\noise3_model.json.bin" />
-    <Content Include="waifu2x\models_rgb\scale2.0x_model.json" />
-    <Content Include="waifu2x\models_rgb\scale2.0x_model.json.bin" />
-    <None Include="waifu2x\w2xc.exp" />
-    <None Include="waifu2x\w2xc.lib" />
+    <Content Include="waifu2x\models_rgb\noise0_model.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\noise0_model.json.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\noise1_model.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\noise1_model.json.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\noise2_model.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\noise2_model.json.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\noise3_model.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\noise3_model.json.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\scale2.0x_model.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\models_rgb\scale2.0x_model.json.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\w2xc.exp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\w2xc.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -151,13 +179,27 @@
     <Content Include="ffmpeg\ffmpeg.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="waifu2x\conv.exe" />
-    <Content Include="waifu2x\opencv_world401.dll" />
-    <Content Include="waifu2x\runbench.exe" />
-    <Content Include="waifu2x\runtest.exe" />
-    <Content Include="waifu2x\w2xc.dll" />
-    <Content Include="waifu2x\w2xcr.exe" />
-    <Content Include="waifu2x\waifu2x-converter-cpp.exe" />
+    <Content Include="waifu2x\conv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\opencv_world401.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\runbench.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\runtest.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\w2xc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\w2xcr.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="waifu2x\waifu2x-converter-cpp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
