@@ -87,7 +87,7 @@ namespace Video2x
             try
             {
                 temp_dir_path = Path.Combine(Windows.Storage.ApplicationData.Current.TemporaryFolder.Path, "videoframes");
-                uwp_mode = true;
+                //uwp_mode = true;
 
             }
             catch (Exception)
