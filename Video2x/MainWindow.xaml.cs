@@ -115,7 +115,6 @@ namespace Video2x
 
 
             Directory.CreateDirectory(temp_dir_path); //create folder for frames
-            MessageBox.Show(temp_dir_path);
             string waifu_2x_folder = Path.Combine(application_path, "waifu2x");
             string waifu_2x_folder_temp = Path.Combine(temp_dir_path, "waifu2x");
             string models_rgb_folder = Path.Combine(waifu_2x_folder, "models_rgb");
@@ -123,7 +122,6 @@ namespace Video2x
             Funzioni_utili.DirectoryCopy(waifu_2x_folder, waifu_2x_folder_temp); //copia waifu2x nella temp
             Funzioni_utili.DirectoryCopy(models_rgb_folder, models_rgb_folder_temp); //copia modelli rete neurale
             string ffmpeg_file = Path.Combine(Path.Combine(application_path, "ffmpeg"), "ffmpeg.exe");
-            MessageBox.Show(ffmpeg_file);
             File.Copy(ffmpeg_file, Path.Combine(temp_dir_path, "ffmpeg.exe")); //copia ffmpeg.exe
 
 
@@ -153,7 +151,6 @@ namespace Video2x
 
 
 
-            MessageBox.Show(temp_dir_path);
 
 
             progress_bar.Visibility = Visibility.Visible;
@@ -231,81 +228,10 @@ namespace Video2x
         }
 
 
-        public static class Funzioni_utili
+    
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            public static string AddQuotesIfRequired(string path)
-            {
-                return !string.IsNullOrWhiteSpace(path) ?
-                    path.Contains(" ") && (!path.StartsWith("\"") && !path.EndsWith("\"")) ?
-                        "\"" + path + "\"" : path :
-                        string.Empty;
-            }
-            public static string GetClipBoradData()
-            {
-                try
-                {
-                    string clipboardData = null;
-                    Exception threadEx = null;
-                    Thread staThread = new Thread(
-                        delegate ()
-                        {
-                            try
-                            {
-                                clipboardData = Clipboard.GetText(TextDataFormat.Text);
-                            }
-
-                            catch (Exception ex)
-                            {
-                                threadEx = ex;
-                            }
-                        });
-                    staThread.SetApartmentState(ApartmentState.STA);
-                    staThread.Start();
-                    staThread.Join();
-                    return clipboardData;
-                }
-                catch (Exception)
-                {
-                    return string.Empty;
-                }
-            }
-            public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs = true)
-            {
-                // Get the subdirectories for the specified directory.
-                DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-
-                if (!dir.Exists)
-                {
-                    throw new DirectoryNotFoundException(
-                        "Source directory does not exist or could not be found: "
-                        + sourceDirName);
-                }
-
-                DirectoryInfo[] dirs = dir.GetDirectories();
-                // If the destination directory doesn't exist, create it.
-                if (!Directory.Exists(destDirName))
-                {
-                    Directory.CreateDirectory(destDirName);
-                }
-
-                // Get the files in the directory and copy them to the new location.
-                FileInfo[] files = dir.GetFiles();
-                foreach (FileInfo file in files)
-                {
-                    string temppath = Path.Combine(destDirName, file.Name);
-                    file.CopyTo(temppath, false);
-                }
-
-                // If copying subdirectories, copy them and their contents to new location.
-                if (copySubDirs)
-                {
-                    foreach (DirectoryInfo subdir in dirs)
-                    {
-                        string temppath = Path.Combine(destDirName, subdir.Name);
-                        DirectoryCopy(subdir.FullName, temppath, copySubDirs);
-                    }
-                }
-            }
+            MessageBox.Show("App created by fuomag9\nSource code is available here: https://github.com/fuomag9/Video2x");
         }
     }
 }

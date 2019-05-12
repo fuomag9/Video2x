@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Video2x"
         mc:Ignorable="d"
-        Title="Video2X 1.2" Height="450" Width="800">
+        Title="Video2X" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="455*"/>
@@ -18,7 +18,13 @@
         <Button x:Name="save_button" Content="save file" HorizontalAlignment="Left" Margin="30.176,84,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="Save_button_Click" Grid.Column="1"/>
         <CheckBox x:Name="checkbox_loseless" Content="Loseless compression" HorizontalAlignment="Left" Margin="161,33,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="15" Margin="22,139,0,0" VerticalAlignment="Top" Width="551" Grid.ColumnSpan="2" Visibility="Hidden"/>
-        <CheckBox x:Name="checkbox_debug" Content="Enable debug" HorizontalAlignment="Left" Margin="161,53,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        
+        <Menu HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="32">
+            <MenuItem Header="File">
+                <MenuItem x:Name="checkbox_debug" Header="Enable debug" IsCheckable="True"></MenuItem>
+                <MenuItem Header="Info" Click="MenuItem_Click" ></MenuItem>
+            </MenuItem>
+        </Menu>
 
     </Grid>
 </Window>
