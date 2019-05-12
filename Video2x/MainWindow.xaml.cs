@@ -37,7 +37,7 @@ namespace Video2x
 
         private void Save_button_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "mp4|*.mp4" + "|all files|*.*"
             };
@@ -57,10 +57,11 @@ namespace Video2x
             int frames_count = 0;
             int compression_rate;
             bool debug;
-            string application_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string temp_dir_path = Path.Combine(Path.GetTempPath(), "videoframes");
+            string application_path;
+            //bool uwp_mode = false;
+            string temp_dir_path;
 
-            //exceptions checking
+            #region exceptions checking
 
             if (textbox_save.Text == "")
             {
@@ -79,6 +80,52 @@ namespace Video2x
                 MessageBox.Show("You can't overwrite the source file!");
                 return;
             }
+            #endregion
+
+            application_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            try
+            {
+                temp_dir_path = Path.Combine(Windows.Storage.ApplicationData.Current.TemporaryFolder.Path, "videoframes");
+                uwp_mode = true;
+
+            }
+            catch (Exception)
+            {
+
+                temp_dir_path = Path.Combine(Path.GetTempPath(), "videoframes");
+
+            }
+            if (Directory.Exists(temp_dir_path))
+
+            {
+                try
+                {
+                    Directory.Delete(temp_dir_path, true);
+                }
+                catch (IOException)
+                {
+
+                    MessageBox.Show("An error happened, retry");
+                    return;
+                }
+
+
+            }
+
+
+            Directory.CreateDirectory(temp_dir_path); //create folder for frames
+            MessageBox.Show(temp_dir_path);
+            string waifu_2x_folder = Path.Combine(application_path, "waifu2x");
+            string waifu_2x_folder_temp = Path.Combine(temp_dir_path, "waifu2x");
+            string models_rgb_folder = Path.Combine(waifu_2x_folder, "models_rgb");
+            string models_rgb_folder_temp = Path.Combine(temp_dir_path, "models_rgb");
+            Funzioni_utili.DirectoryCopy(waifu_2x_folder, waifu_2x_folder_temp); //copia waifu2x nella temp
+            Funzioni_utili.DirectoryCopy(models_rgb_folder, models_rgb_folder_temp); //copia modelli rete neurale
+            string ffmpeg_file = Path.Combine(Path.Combine(application_path, "ffmpeg"), "ffmpeg.exe");
+            MessageBox.Show(ffmpeg_file);
+            File.Copy(ffmpeg_file, Path.Combine(temp_dir_path, "ffmpeg.exe")); //copia ffmpeg.exe
+
 
 
             if (checkbox_loseless.IsChecked == true)
@@ -99,30 +146,15 @@ namespace Video2x
                 debug = false;
             }
 
+
+
+
             //code
 
-            if (Directory.Exists(temp_dir_path))
-
-            {
-                try
-                {
-                    Directory.Delete(temp_dir_path, true);
-                }
-                catch (IOException)
-                {
-
-                    MessageBox.Show("An error happened, retry");
-                    return;
-                }
 
 
-            }
+            MessageBox.Show(temp_dir_path);
 
-            
-
-            Directory.CreateDirectory(temp_dir_path); //create folder for frames
-
-            
 
             progress_bar.Visibility = Visibility.Visible;
 
@@ -130,7 +162,9 @@ namespace Video2x
             //just because threads hates me :(
             string input_file = textbox_folder.Text;
 
-            await Task.Run(() => Esegui_console(temp_dir_path, "ffmpeg -i '" + input_file + "' -vsync 0 img-%d.png", debug));
+            Console.WriteLine(@".\ffmpeg.exe -i '" + input_file + "' -vsync 0 img-%d.png");
+
+            await Task.Run(() => Esegui_console(temp_dir_path, @".\ffmpeg.exe -i '" + input_file + "' -vsync 0 img-%d.png", debug));
 
             progress_bar.Value++;
 
@@ -156,12 +190,7 @@ namespace Video2x
 
 
             var lista_files_temp_dir = temp_dir.GetFiles();
-            string waifu_2x_folder = Path.Combine(application_path, "waifu2x");
-            string waifu_2x_folder_temp = Path.Combine(temp_dir_path, "waifu2x");
-            string models_rgb_folder = Path.Combine(waifu_2x_folder, "models_rgb");
-            string models_rgb_folder_temp = Path.Combine(temp_dir_path, "models_rgb");
-            Funzioni_utili.DirectoryCopy(waifu_2x_folder, waifu_2x_folder_temp); //copia waifu2x nella temp
-            Funzioni_utili.DirectoryCopy(models_rgb_folder, models_rgb_folder_temp);
+            
 
 
 
@@ -171,12 +200,7 @@ namespace Video2x
                 progress_bar.Value++;
             }
 
-            
-
-
-
-
-            await Task.Run(() => Esegui_console(temp_dir_path, "ffmpeg -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
+            await Task.Run(() => Esegui_console(temp_dir_path, @".\ffmpeg.exe -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
 
             progress_bar.Value++;
 
@@ -184,16 +208,7 @@ namespace Video2x
 
             progress_bar.Value = 0;
             progress_bar.Visibility = Visibility.Hidden;
-            Directory.Delete(Path.GetTempPath() + "\\videoframes\\", true);
-
-
-
-
-
-
-
-
-
+            Directory.Delete(temp_dir_path, true); //clean temp files
 
         }
 

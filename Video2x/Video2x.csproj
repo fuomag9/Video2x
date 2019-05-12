@@ -26,7 +26,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -62,6 +62,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.Runtime.WindowsRuntime.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,6 +74,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Windows">
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0\Windows.winmd</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -116,16 +123,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="waifu2x\models_rgb\noise0_model.json" />
-    <None Include="waifu2x\models_rgb\noise0_model.json.bin" />
-    <None Include="waifu2x\models_rgb\noise1_model.json" />
-    <None Include="waifu2x\models_rgb\noise1_model.json.bin" />
-    <None Include="waifu2x\models_rgb\noise2_model.json" />
-    <None Include="waifu2x\models_rgb\noise2_model.json.bin" />
-    <None Include="waifu2x\models_rgb\noise3_model.json" />
-    <None Include="waifu2x\models_rgb\noise3_model.json.bin" />
-    <None Include="waifu2x\models_rgb\scale2.0x_model.json" />
-    <None Include="waifu2x\models_rgb\scale2.0x_model.json.bin" />
+    <Content Include="waifu2x\models_rgb\noise0_model.json" />
+    <Content Include="waifu2x\models_rgb\noise0_model.json.bin" />
+    <Content Include="waifu2x\models_rgb\noise1_model.json" />
+    <Content Include="waifu2x\models_rgb\noise1_model.json.bin" />
+    <Content Include="waifu2x\models_rgb\noise2_model.json" />
+    <Content Include="waifu2x\models_rgb\noise2_model.json.bin" />
+    <Content Include="waifu2x\models_rgb\noise3_model.json" />
+    <Content Include="waifu2x\models_rgb\noise3_model.json.bin" />
+    <Content Include="waifu2x\models_rgb\scale2.0x_model.json" />
+    <Content Include="waifu2x\models_rgb\scale2.0x_model.json.bin" />
     <None Include="waifu2x\w2xc.exp" />
     <None Include="waifu2x\w2xc.lib" />
   </ItemGroup>
@@ -140,6 +147,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ffmpeg\ffmpeg.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="waifu2x\conv.exe" />
     <Content Include="waifu2x\opencv_world401.dll" />
     <Content Include="waifu2x\runbench.exe" />
@@ -148,5 +158,6 @@
     <Content Include="waifu2x\w2xcr.exe" />
     <Content Include="waifu2x\waifu2x-converter-cpp.exe" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
