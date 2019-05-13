@@ -219,9 +219,8 @@ namespace Video2x
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             }
             startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "cd '" + cartella + "';" + command;
-            //startInfo.Arguments = "cd '" + cartella + "';dir;PAUSE";
-
+            startInfo.WorkingDirectory = cartella;
+            startInfo.Arguments = command;
             process.StartInfo = startInfo;
             process.Start();
             process.WaitForExit();
