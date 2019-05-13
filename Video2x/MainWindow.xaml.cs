@@ -54,7 +54,7 @@ namespace Video2x
             string framerate;
             string risoluzione;
             float tempo_stimato;
-            int frames_count = 0;
+            long frames_count;
             int compression_rate=0; //default=no compression
             bool debug;
             string application_path;
@@ -164,10 +164,10 @@ namespace Video2x
 
 
             DirectoryInfo temp_dir = new DirectoryInfo(temp_dir_path);
-            foreach (var item in temp_dir.GetFiles())
-            {
-                frames_count++; //conta i frame totali
-            }
+            frames_count = temp_dir.GetFiles().LongLength; //conta i frame totali
+
+
+
 
             progress_bar.Maximum = frames_count + 1;
 
@@ -182,16 +182,22 @@ namespace Video2x
             risoluzione = shellProperty_width.Value.ToString() + "x" + shellProperty_height.Value.ToString();
 
 
-            var lista_files_temp_dir = temp_dir.GetFiles();
-            
+            var lista_files_temp_dir = temp_dir.GetFiles(); //aka i frame nella cartella
+            time_textblock.Visibility = Visibility.Visible; //show estimate time (blank at the time)
 
 
-
+            int frame_index = 1; //foreach is <3 but no index :<
             foreach (FileInfo frame in lista_files_temp_dir)
             {
+                var start_time = DateTime.Now; 
                 await Task.Run(() => Funzioni_utili.Esegui_console(temp_dir_path, ".'" + Path.Combine(waifu_2x_folder_temp, @".\waifu2x-converter-cpp.exe") + "' -i " + frame.Name + " -o " + frame.Name, debug));
                 progress_bar.Value++;
+                var delta_time = Math.Floor((DateTime.Now - start_time).TotalSeconds * (frames_count - frame_index));
+                time_textblock.Text = "Remaining time: "+ delta_time.ToString()+"s";
+                frame_index++;
             }
+            time_textblock.Visibility = Visibility.Hidden; //can't predict estimate time for ffmpeg yet :(
+
 
             await Task.Run(() => Funzioni_utili.Esegui_console(temp_dir_path, @".\ffmpeg.exe -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
 

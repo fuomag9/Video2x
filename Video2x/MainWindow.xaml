@@ -7,24 +7,21 @@
         mc:Ignorable="d"
         Title="Video2X" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="455*"/>
-            <ColumnDefinition Width="337*"/>
-        </Grid.ColumnDefinitions>
         <Button x:Name="button_enhance" Content="ENHANCE" HorizontalAlignment="Left" Margin="206,184,0,0" VerticalAlignment="Top" Width="367" Height="181" Click="Button_enhance_Click" Grid.ColumnSpan="2" FontSize="72"/>
-        <Button Content="select video" HorizontalAlignment="Left" Margin="30.176,33,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="Button_Click" Grid.Column="1"/>
+        <Button Content="select video" Margin="0,33,219,0" VerticalAlignment="Top" Height="30" Click="Button_Click" HorizontalAlignment="Right" Width="88"/>
         <TextBox x:Name="textbox_folder" HorizontalAlignment="Left" Height="30" Margin="22,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True" Grid.ColumnSpan="2"/>
         <TextBox x:Name="textbox_save" HorizontalAlignment="Left" Height="30" Margin="22,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True" Grid.ColumnSpan="2"/>
-        <Button x:Name="save_button" Content="save file" HorizontalAlignment="Left" Margin="30.176,84,0,0" VerticalAlignment="Top" Width="88" Height="30" Click="Save_button_Click" Grid.Column="1"/>
-        <CheckBox x:Name="checkbox_loseless" Content="Loseless compression" HorizontalAlignment="Left" Margin="161,33,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="15" Margin="22,139,0,0" VerticalAlignment="Top" Width="551" Grid.ColumnSpan="2" Visibility="Hidden"/>
-        
+        <Button x:Name="save_button" Content="save file" HorizontalAlignment="Right" Margin="0,84,219,0" VerticalAlignment="Top" Width="88" Height="30" Click="Save_button_Click"/>
+        <CheckBox x:Name="checkbox_loseless" Content="Loseless compression" HorizontalAlignment="Right" Margin="0,33,10,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="17.75" Margin="22,139,0,0" VerticalAlignment="Top" Width="551" Visibility="Hidden"/>
+
         <Menu HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="32">
             <MenuItem Header="File">
                 <MenuItem x:Name="checkbox_debug" Header="Enable debug" IsCheckable="True"></MenuItem>
                 <MenuItem Header="Info" Click="MenuItem_Click" ></MenuItem>
             </MenuItem>
         </Menu>
+        <TextBlock x:Name="time_textblock" HorizontalAlignment="Right" Margin="0,139,64.209,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17.75" Width="139.957" Visibility="Hidden"/>
 
     </Grid>
 </Window>
