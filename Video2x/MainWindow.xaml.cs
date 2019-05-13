@@ -55,7 +55,7 @@ namespace Video2x
             string risoluzione;
             float tempo_stimato;
             int frames_count = 0;
-            int compression_rate;
+            int compression_rate=0; //default=no compression
             bool debug;
             string application_path;
             //bool uwp_mode = false;
@@ -126,11 +126,7 @@ namespace Video2x
 
 
 
-            if (checkbox_loseless.IsChecked == true)
-            {
-                compression_rate = 0;
-            }
-            else
+            if (checkbox_loseless.IsChecked == false)
             {
                 compression_rate = 15;
             }
@@ -161,7 +157,7 @@ namespace Video2x
 
             Console.WriteLine(@".\ffmpeg.exe -i '" + input_file + "' -vsync 0 img-%d.png");
 
-            await Task.Run(() => Esegui_console(temp_dir_path, @".\ffmpeg.exe -i '" + input_file + "' -vsync 0 img-%d.png", debug));
+            await Task.Run(() => Funzioni_utili.Esegui_console(temp_dir_path, @".\ffmpeg.exe -i '" + input_file + "' -vsync 0 img-%d.png", debug));
 
             progress_bar.Value++;
 
@@ -193,11 +189,11 @@ namespace Video2x
 
             foreach (FileInfo frame in lista_files_temp_dir)
             {
-                await Task.Run(() => Esegui_console(temp_dir_path, ".'" + Path.Combine(waifu_2x_folder_temp, @".\waifu2x-converter-cpp.exe") + "' -i " + frame.Name + " -o " + frame.Name, debug));
+                await Task.Run(() => Funzioni_utili.Esegui_console(temp_dir_path, ".'" + Path.Combine(waifu_2x_folder_temp, @".\waifu2x-converter-cpp.exe") + "' -i " + frame.Name + " -o " + frame.Name, debug));
                 progress_bar.Value++;
             }
 
-            await Task.Run(() => Esegui_console(temp_dir_path, @".\ffmpeg.exe -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
+            await Task.Run(() => Funzioni_utili.Esegui_console(temp_dir_path, @".\ffmpeg.exe -r " + framerate + " -f image2 -s " + risoluzione + " -start_number 1 -i img-%d.png -vframes " + frames_count + " -vcodec libx264 -crf " + compression_rate + " -pix_fmt yuv420p '" + result_file + "'", debug));
 
             progress_bar.Value++;
 
@@ -209,22 +205,7 @@ namespace Video2x
 
         }
 
-        public void Esegui_console(string cartella, string command, bool visualizza_console = false)
-        {
-            // Perform a long running work...
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            if (!visualizza_console)
-            {
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            }
-            startInfo.FileName = "powershell.exe";
-            startInfo.WorkingDirectory = cartella;
-            startInfo.Arguments = command;
-            process.StartInfo = startInfo;
-            process.Start();
-            process.WaitForExit();
-        }
+
 
 
     

@@ -80,6 +80,22 @@ namespace Video2x
                 }
             }
         }
+        public static void Esegui_console(string cartella, string command, bool visualizza_console = false)
+        {
+            // Perform a long running work...
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            if (!visualizza_console)
+            {
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            }
+            startInfo.FileName = "powershell.exe";
+            startInfo.WorkingDirectory = cartella;
+            startInfo.Arguments = command;
+            process.StartInfo = startInfo;
+            process.Start();
+            process.WaitForExit();
+        }
     }
 
 }
