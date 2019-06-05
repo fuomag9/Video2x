@@ -117,32 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Enable debug" xml:space="preserve">
-    <value>Enable debug</value>
-  </data>
   <data name="Enhance" xml:space="preserve">
-    <value>ENHANCE</value>
+    <value>MIGLIORA</value>
   </data>
   <data name="Info" xml:space="preserve">
     <value>Info</value>
   </data>
+  <data name="Enable debug" xml:space="preserve">
+    <value>Abilita debug</value>
+  </data>
   <data name="info_text" xml:space="preserve">
-    <value>App created by fuomag9
-Source code is available here: https://github.com/fuomag9/Video2x</value>
+    <value>App creata da fuomag9
+Codice sorgente disponibile qui: https://github.com/fuomag9/Video2x</value>
   </data>
   <data name="Loseless compression" xml:space="preserve">
-    <value>Loseless compression</value>
+    <value>Compressione loseless</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Apri</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Salva</value>
   </data>
   <data name="remaining_time" xml:space="preserve">
-    <value>Remaining time:</value>
+    <value>Tempo rimanente:</value>
   </data>
   <data name="Finished" xml:space="preserve">
-    <value>Finished!</value>
+    <value>Finito!</value>
   </data>
 </root>

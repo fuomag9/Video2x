@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Globalization;
 
 namespace Video2x
 {
@@ -55,7 +56,7 @@ namespace Video2x
             string risoluzione;
             float tempo_stimato;
             long frames_count;
-            int compression_rate=0; //default=no compression
+            int compression_rate=0; //default= no compression
             bool debug;
             string application_path;
             //bool uwp_mode = false;
@@ -141,13 +142,7 @@ namespace Video2x
             }
 
 
-
-
             //code
-
-
-
-
 
             progress_bar.Visibility = Visibility.Visible;
 
@@ -193,7 +188,7 @@ namespace Video2x
                 await Task.Run(() => Funzioni_utili.Esegui_console(temp_dir_path, ".'" + Path.Combine(waifu_2x_folder_temp, @".\waifu2x-converter-cpp.exe") + "' -i " + frame.Name + " -o " + frame.Name, debug));
                 progress_bar.Value++;
                 var delta_time = Math.Floor((DateTime.Now - start_time).TotalSeconds * (frames_count - frame_index));
-                time_textblock.Text = "Remaining time: "+ delta_time.ToString()+"s";
+                time_textblock.Text = Properties.Resources.remaining_time+" "+ delta_time.ToString()+"s";
                 frame_index++;
             }
             time_textblock.Visibility = Visibility.Hidden; //can't predict estimate time for ffmpeg yet :(
@@ -203,7 +198,7 @@ namespace Video2x
 
             progress_bar.Value++;
 
-            MessageBox.Show("Finished!");
+            MessageBox.Show(Properties.Resources.Finished);
 
             progress_bar.Value = 0;
             progress_bar.Visibility = Visibility.Hidden;
@@ -217,7 +212,7 @@ namespace Video2x
     
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("App created by fuomag9\nSource code is available here: https://github.com/fuomag9/Video2x");
+            MessageBox.Show(Properties.Resources.info_text);
         }
     }
 }

@@ -3,25 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:Video2x.Properties"
+        
         xmlns:local="clr-namespace:Video2x"
         mc:Ignorable="d"
-        Title="Video2X" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="button_enhance" Content="ENHANCE" HorizontalAlignment="Left" Margin="206,184,0,0" VerticalAlignment="Top" Width="367" Height="181" Click="Button_enhance_Click" Grid.ColumnSpan="2" FontSize="72"/>
-        <Button Content="select video" Margin="0,33,219,0" VerticalAlignment="Top" Height="30" Click="Button_Click" HorizontalAlignment="Right" Width="88"/>
-        <TextBox x:Name="textbox_folder" HorizontalAlignment="Left" Height="30" Margin="22,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="textbox_save" HorizontalAlignment="Left" Height="30" Margin="22,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True" Grid.ColumnSpan="2"/>
-        <Button x:Name="save_button" Content="save file" HorizontalAlignment="Right" Margin="0,84,219,0" VerticalAlignment="Top" Width="88" Height="30" Click="Save_button_Click"/>
-        <CheckBox x:Name="checkbox_loseless" Content="Loseless compression" HorizontalAlignment="Right" Margin="0,33,10,0" VerticalAlignment="Top"/>
-        <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="17.75" Margin="22,139,0,0" VerticalAlignment="Top" Width="551" Visibility="Hidden"/>
+        Title="Video2X" Height="450" Width="803" SizeToContent="WidthAndHeight" MinWidth="803" MinHeight="450">
+
+    <Grid Margin="0,0,2,0">
+
+        <Grid HorizontalAlignment="Right">
+            <CheckBox x:Name="checkbox_loseless" Content="{x:Static p:Resources.Loseless_compression}" HorizontalAlignment="Right" Margin="0,33,10,0" VerticalAlignment="Top"/>
+        </Grid>
+
+        <Grid Width="794" Height="419" MinWidth="794" MinHeight="419">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240*"/>
+                <ColumnDefinition Width="157*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="{x:Static p:Resources.Open}" Margin="0,33,219,0" VerticalAlignment="Top" Height="30" Click="Button_Click" HorizontalAlignment="Right" Width="88" Grid.Column="1"/>
+            <Button x:Name="save_button" Content="{x:Static p:Resources.Save}" Margin="0,84,219,0" Width="88" Height="30" Click="Save_button_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1"/>
+            <Button x:Name="button_enhance" Content="{x:Static p:Resources.Enhance}" Margin="206,175,-93,0" VerticalAlignment="Top" Width="367" Height="181" Click="Button_enhance_Click" FontSize="72"/>
+            <TextBox x:Name="textbox_folder" HorizontalAlignment="Left" Height="30" Margin="22,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True"/>
+            <TextBox x:Name="textbox_save" HorizontalAlignment="Left" Height="30" Margin="22,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="444" IsReadOnly="True"/>
+            <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="18" Margin="22,139,0,0" VerticalAlignment="Top" Width="551" Visibility="Hidden" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="time_textblock" Margin="108.834,139,65.209,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17.75" Grid.Column="1"/>
+
+        </Grid>
 
         <Menu HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="32">
             <MenuItem Header="File">
-                <MenuItem x:Name="checkbox_debug" Header="Enable debug" IsCheckable="True"></MenuItem>
-                <MenuItem Header="Info" Click="MenuItem_Click" ></MenuItem>
+                <MenuItem x:Name="checkbox_debug" Header="{x:Static p:Resources.Enable_debug}" IsCheckable="True"></MenuItem>
+                <MenuItem Header="{x:Static p:Resources.Info}" Click="MenuItem_Click" ></MenuItem>
             </MenuItem>
         </Menu>
-        <TextBlock x:Name="time_textblock" HorizontalAlignment="Right" Margin="0,139,64.209,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17.75" Width="139.957" Visibility="Hidden"/>
 
     </Grid>
 </Window>
