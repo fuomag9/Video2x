@@ -17,6 +17,7 @@ namespace Video2x
     {
         public MainWindow()
         {
+
             InitializeComponent();
 
         }
@@ -160,9 +161,6 @@ namespace Video2x
 
             DirectoryInfo temp_dir = new DirectoryInfo(temp_dir_path);
             frames_count = temp_dir.GetFiles().LongLength; //conta i frame totali
-
-
-
 
             progress_bar.Maximum = frames_count + 1;
 
