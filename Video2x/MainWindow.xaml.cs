@@ -1,10 +1,11 @@
-﻿using Microsoft.Win32;
-using Microsoft.WindowsAPICodePack.Shell;
-using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+
+using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Shell;
+using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 
 namespace Video2x
 {
