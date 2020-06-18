@@ -5,15 +5,15 @@ using System.Windows;
 
 namespace Video2x
 {
-    public static class Funzioni_utili
+    public static class FunzioniUtili
     {
         public static string AddQuotesIfRequired(string path)
         {
-            return !string.IsNullOrWhiteSpace(path) ?
-                path.Contains(" ") && (!path.StartsWith("\"") && !path.EndsWith("\"")) ?
-                    "\"" + path + "\"" : path :
-                    string.Empty;
+            return !string.IsNullOrWhiteSpace(path)
+                ? path.Contains(" ") && (!path.StartsWith("\"") && !path.EndsWith("\"")) ? "\"" + path + "\"" : path
+                : string.Empty;
         }
+
         public static string GetClipBoradData()
         {
             try
@@ -21,7 +21,7 @@ namespace Video2x
                 string clipboardData = null;
                 Exception threadEx = null;
                 Thread staThread = new Thread(
-                    delegate ()
+                    delegate()
                     {
                         try
                         {
@@ -43,6 +43,7 @@ namespace Video2x
                 return string.Empty;
             }
         }
+
         public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs = true)
         {
             // Get the subdirectories for the specified directory.
@@ -51,8 +52,7 @@ namespace Video2x
             if (!dir.Exists)
             {
                 throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                    $"Source directory does not exist or could not be found: {sourceDirName}");
             }
 
             DirectoryInfo[] dirs = dir.GetDirectories();
@@ -76,19 +76,21 @@ namespace Video2x
                 foreach (DirectoryInfo subdir in dirs)
                 {
                     string temppath = Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                    DirectoryCopy(subdir.FullName, temppath);
                 }
             }
         }
-        public static void Esegui_console(string cartella, string command, bool visualizza_console = false)
+
+        public static void Esegui_console(string cartella, string command, bool visualizzaConsole = false)
         {
             // Perform a long running work...
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            if (!visualizza_console)
+            if (!visualizzaConsole)
             {
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             }
+
             startInfo.FileName = "powershell.exe";
             startInfo.WorkingDirectory = cartella;
             startInfo.Arguments = command;
@@ -97,5 +99,4 @@ namespace Video2x
             process.WaitForExit();
         }
     }
-
 }
